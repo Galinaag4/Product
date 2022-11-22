@@ -1,0 +1,10 @@
+###Получение списка продуктов
+GET http://localhost:8080/products
+###Добавление продукта в корзину
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "бананы",
+  "prise": 100
+}
