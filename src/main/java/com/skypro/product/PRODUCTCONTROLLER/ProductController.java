@@ -1,27 +1,30 @@
 package com.skypro.product.PRODUCTCONTROLLER;
 
-import com.skypro.product.MODEL.Product;
-import com.skypro.product.RECORD.ProductRequest;
 import com.skypro.product.SERVISE.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
+@RequestMapping("/store/order")
 public class ProductController {
-    ProductService productService;
-    public ProductController(ProductService productService){this.productService=productService;}
-    @GetMapping("/products")
-    public Collection<Product> getAllProduct(){
-        return  this.productService.getAllProduct();
+    private final ProductService productService;
 
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
-    @PostMapping("/products")
-    public Product createProduct(@RequestBody ProductRequest productRequest){
-        return   this.productService.addProduct(productRequest);
+
+    @GetMapping("/add")
+    public String add(@RequestParam("id") List<Integer> ids){
+        this.productService.addTo(ids);
+        return "Приняты параметры " + ids;
     }
+
+    @GetMapping("/get")
+    public List<Integer> get(){
+    return this.productService.getTo();}
+
+
 
 }

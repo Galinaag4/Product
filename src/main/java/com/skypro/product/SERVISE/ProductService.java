@@ -1,28 +1,26 @@
 package com.skypro.product.SERVISE;
 
-import com.skypro.product.MODEL.Product;
-import com.skypro.product.RECORD.ProductRequest;
-import org.apache.commons.lang3.StringUtils;
+import com.skypro.product.REPOSITORY.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class ProductService {
-     Map<Integer, Product> products = new HashMap<>();
-    public Collection<Product> getAllProduct(){
-        return this.products.values();
-    }
-    public Product addProduct(ProductRequest productRequest){
-        if (StringUtils.isBlank(productRequest.getName())){
-            throw  new IllegalArgumentException(" Введите название");
-        }
-        Product product = new Product(StringUtils.capitalize(productRequest.getName()),
-                productRequest.getPrice());
+    private final ProductRepository productRepository;
 
-        this.products.put(product.getId(), product);
-        return product;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
+
+    public void addTo(List<Integer> ids){
+        this.productRepository.addTo(ids);
+    }
+    public List<Integer> getTo(){
+        return this.productRepository.getTo();
+    }
+
+
 }
+

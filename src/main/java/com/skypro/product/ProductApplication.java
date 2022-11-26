@@ -1,4 +1,4 @@
-package com.skypro.product.SERVISE;
+package com.skypro.product;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
